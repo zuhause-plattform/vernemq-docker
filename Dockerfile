@@ -1,18 +1,19 @@
 # Changed: added a build container
-FROM alpine:3.21 as build
+FROM alpine:3.21 AS build
 
 ENV VERNEMQ_VERSION="2.1.0"
 ENV VERNEMQ_DOCKER_VERSION="2.0.1"
 
-RUN \
-  apk add \
+RUN apk update && apk add \
     git \
     alpine-sdk \
     erlang-dev \
     snappy-dev \
     bsd-compat-headers \
     openssl-dev \
-    tzdata
+    tzdata \
+    ncurses-libs \
+    libstdc++
 
 RUN git clone --depth 1 --branch ${VERNEMQ_VERSION} \
       https://github.com/vernemq/vernemq.git \
