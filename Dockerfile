@@ -1,7 +1,7 @@
 # Changed: added a build container
-FROM alpine:3.21 AS build
+FROM alpine:3.22.1 AS build
 
-ENV VERNEMQ_VERSION="2.1.0"
+ENV VERNEMQ_VERSION="2.1.1"
 ENV VERNEMQ_DOCKER_VERSION="2.0.1"
 
 RUN apk update && apk add \
@@ -31,7 +31,7 @@ RUN wget -O /vernemq/etc/vm.args https://github.com/vernemq/docker-vernemq/raw/$
 RUN chown -R 10000:10000 /vernemq
 RUN chmod 0755 /vernemq/bin/vernemq.sh
 
-FROM alpine:3.21
+FROM alpine:3.22.1
 
 # Changed: added openssl (was in the original debian Dockerfile but not in alpine) and tzdate
 RUN apk --no-cache --update --available upgrade && \
